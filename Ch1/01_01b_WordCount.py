@@ -1,6 +1,25 @@
+import string
+from collections import Counter
+
+# Function to remove punctuation
+def remove_punctuation(text):
+    return text.translate(str.maketrans("", "", string.punctuation))
+
 def count_words(paragraph):
-    #code goes here
-    return
+    # Make all lower case
+    paragraph = paragraph.lower()
+    
+    # Get rid of all punctuation
+    paragraph = remove_punctuation(paragraph)
+    
+    # Split the paragraph at each space
+    wordlist = paragraph.split()
+    
+    # print the total number of words
+    print(f"Total words: {len(wordlist)}")
+    
+    # Return the count for each word
+    return Counter(wordlist)
 
 def main():
     paragraph = """Nadia’s Garden Restaurant is the creation of husband and wife team Nadia and Timothy Arbore. 

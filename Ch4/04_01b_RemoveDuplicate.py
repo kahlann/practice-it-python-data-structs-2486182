@@ -1,9 +1,38 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
+from pprint import pprint
+  
+# Function to return a default 
+# value for keys that are not 
+# present 
+def MenuDict(menu_list):
+    # Dictionary where the default is a set
+    menu = defaultdict(lambda: set())
+    # Iterate over each item in the list, and categorise as starter, salad, entree, or dessert
+    for item in menu_list:
+        # Starters
+        if item.identifier[0:3] == "STA":
+                menu["starter"].add(item)
+        # Beverages
+        elif item.identifier[0:3] == "BEV":
+                menu["beverage"].add(item)
+        # Salads
+        elif item.identifier[0:3] == "SAL":
+            menu["salad"].add(item)
+        # Entrees
+        elif item.identifier[0:3] == "ENT":
+                menu["entree"].add(item)
+        # Desserts
+        elif item.identifier[0:3] == "DES":
+                menu["dessert"].add(item)
+    # Return the menu dictionary
+    return menu
+
 
 def main():
-    #add code here
+    # Named tuple template
     Food = namedtuple("Food", ["identifier", "name"])
-
+    
+    # List of items
     nadias_list = [
         Food("STA001",  "Panko Stuffed Mushrooms"),
         Food("BEV003",	"Cafe Latte"),
@@ -36,7 +65,9 @@ def main():
         Food("BEV003",	"Cafe Latte"),
     ]
 
-    return
+    # Sort the food into dictionary, removing duplicates
+    pprint(MenuDict(nadias_list))
+
 
 if __name__ == "__main__":
     main()
